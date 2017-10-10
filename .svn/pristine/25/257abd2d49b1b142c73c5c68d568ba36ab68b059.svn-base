@@ -1,0 +1,11 @@
+package com.zte.dao;
+
+import com.zte.pojo.User;
+
+public interface UserDao {
+	public void saveUser(User user);
+	
+
+	public User checklogin(User user);
+
+}

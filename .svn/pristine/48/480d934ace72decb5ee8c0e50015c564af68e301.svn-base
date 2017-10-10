@@ -1,0 +1,32 @@
+package com.zte.dao;
+
+import com.zte.pojo.City;
+/**
+ * 管理员，功能
+ * @author KevinLuo
+ *
+ */
+
+public interface SuperManagerDao {
+
+	//城市添加，设为热点城市
+	public void addCity(City city);
+	
+	//城市设为热点城市
+	public void setHotCity();
+	
+	//添加僧人
+	public void addSeng();
+	
+	//删除僧人
+	public void deleteSeng();
+	
+	//添加管理员
+	public void addManager();
+	
+	//用户申请成为加盟商审核
+	public void check_join();
+	
+	//加盟商发布房屋信息审核
+	public void checkHouseMessage();
+}

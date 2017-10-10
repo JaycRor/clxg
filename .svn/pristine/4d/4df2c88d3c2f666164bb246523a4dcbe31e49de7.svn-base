@@ -1,0 +1,28 @@
+package com.zte.dao.impl;
+
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import com.zte.dao.TempleDao;
+import com.zte.pojo.Temple;
+
+public class TempleDaoImpl extends HibernateDaoSupport implements TempleDao {
+
+	
+	
+	private TempleDao templeDao;
+	
+	
+	@Override
+	public void save(Temple temple) {
+		// TODO Auto-generated method stub
+		this.getHibernateTemplate().save(temple);
+	}
+
+	public TempleDao getTempleDao() {
+		return templeDao;
+	}
+	public void setTempleDao(TempleDao templeDao) {
+		this.templeDao = templeDao;
+	}
+	
+}

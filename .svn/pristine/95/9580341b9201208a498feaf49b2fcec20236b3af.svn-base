@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="user" extends="struts-default" namespace="/">
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="success">/index.jsp</result>
+			<result name="login">/login.jsp</result>
+			<result name="manager">/manager.html</result>
+			<result name="rent">/rent.jsp</result>
+			<result name="userList">/detail/userList.jsp</result>
+		</action>
+		<action name="checkImg" class="checkImgAction"></action>
+	</package>
+	<package name="temple" extends="struts-default" namespace="/">
+
+		<action name="temple_*" class="templeAction" method="{1}">
+			<result name="xianjuList">/detail/xianjuList.jsp</result>
+		</action>
+	</package>
+	<package name="hotel" extends="struts-default" namespace="/">
+		<action name="hotel_*" class="hotelAction" method="{1}">
+			<result name="conglinList">/detail/conglinList.jsp</result>
+		</action>
+	</package>
+	<package name="monk" extends="struts-default" namespace="/">
+		<action name="monk_*" class="monkAction" method="{1}">
+			<result name="senglvList">/detail/senglvList.jsp</result>
+			<result name="updateSL">/detail/updateSL.jsp</result>
+		</action>
+	</package>
+	<package name="order" extends="struts-default" namespace="/">
+		<action name="order_*" class="orderAction" method="{1}">
+			<result name="orderList">/detail/orderList.jsp</result>
+		</action>
+	</package>
+</struts>    

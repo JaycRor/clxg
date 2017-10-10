@@ -1,0 +1,9 @@
+package com.zte.service;
+
+
+import com.zte.pojo.Temple;
+
+public interface TempleService {
+
+	public void addTemple(Temple temple);
+}

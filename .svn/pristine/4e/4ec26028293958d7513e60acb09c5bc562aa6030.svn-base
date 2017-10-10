@@ -1,0 +1,17 @@
+package com.zte.service.impl;
+
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import com.zte.pojo.Confession;
+import com.zte.service.ConfessionService;
+
+public class ConfessionServiceImpl extends HibernateDaoSupport implements
+		ConfessionService {
+
+	@Override
+	public void addConfession(Confession confession) {
+		// TODO Auto-generated method stub
+		this.getHibernateTemplate().save(confession);
+	}
+
+}

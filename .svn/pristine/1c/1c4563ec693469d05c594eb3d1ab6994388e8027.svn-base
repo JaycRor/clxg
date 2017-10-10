@@ -1,0 +1,35 @@
+package com.zte.action;
+
+import com.opensymphony.xwork2.ActionSupport;
+import com.zte.pojo.Temple;
+import com.zte.service.TempleService;
+
+public class TempleAction extends ActionSupport{
+	
+	private Temple temple;
+	private TempleService templeService;
+
+	public Temple getTemple() {
+		return temple;
+	}
+
+	public void setTemple(Temple temple) {
+		this.temple = temple;
+	}
+
+	public TempleService getTempleService() {
+		return templeService;
+	}
+
+	public void setTempleService(TempleService templeService) {
+		this.templeService = templeService;
+	}
+
+	
+	public String addTemple(){
+		this.templeService.addTemple(temple);
+		return SUCCESS;
+	}
+	
+	
+}

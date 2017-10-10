@@ -1,0 +1,7 @@
+package com.zte.service;
+
+import com.zte.pojo.Confession;
+
+public interface ConfessionService {
+	public void addConfession(Confession confession);
+}

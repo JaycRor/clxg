@@ -1,0 +1,27 @@
+package com.zte.dao.impl;
+
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import com.zte.dao.OrderDao;
+
+public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao{
+
+	@Override
+	public void createNewOrder() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateOrder() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteOrder() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

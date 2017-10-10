@@ -1,0 +1,13 @@
+package com.zte.dao;
+
+public interface OrderDao {
+	//´´½¨¶©µ¥
+	public void createNewOrder();
+	
+	//ÐÞ¸Ä¶©µ¥
+	public void updateOrder();
+	
+	//É¾³ý¶©µ¥£¬¼´ÍË¶©
+	public void deleteOrder();
+	
+}

@@ -1,0 +1,94 @@
+package com.zte.confession.action;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.jfinal.core.Controller;
+import com.zte.base.SpringUtils;
+import com.zte.base.StrRandom;
+import com.zte.pojo.Confession;
+import com.zte.service.ConfessionService;
+
+public class IndexController extends Controller {
+	public void index() {
+		String base = getHttpPath(getRequest());
+		setAttr("base", base);
+		render("/Confession/record.jsp");
+	}
+
+	private String getHttpPath(HttpServletRequest request) {
+		StringBuilder path = new StringBuilder();
+
+		path.append(request.getScheme() + "://");
+		path.append(request.getServerName() + ":");
+		path.append(request.getServerPort());
+		path.append(request.getContextPath());
+
+		return path.toString();
+	}
+
+	/**
+	 * 忏悔在线上传音频示例
+	 * 
+	 * @throws Exception
+	 */
+	public void confessiondupload() throws Exception {
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+		String dateStr = format.format(date);
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		ServletFileUpload load = new ServletFileUpload(factory);
+		List list = load.parseRequest(getRequest());
+		Iterator<FileItem> iter = list.iterator();
+		String path = getRequest().getContextPath();
+		//在服务器上部署之后realPath只能获取到webapps,所以在后面加上了项目名称
+		String realPath = new File(this.getRequest().getSession()
+				.getServletContext().getRealPath(path))
+				.getParent();//+"/clxj"
+		String urlpath = "record/audio/";
+		String audioPath = realPath + "/" + urlpath;
+		//随机码
+		//StrRandom strRandom = new StrRandom();
+		String pwd = StrRandom.getStringRandom(10);
+		while (iter.hasNext()) {
+			FileItem item = iter.next();
+			if (!item.isFormField()) {
+				// 保存文件，简单的保存到本地，可以自行修改
+				item.write(new File(audioPath + dateStr + item.getName()));
+				audio("/" +urlpath+ dateStr + item.getName(),pwd);
+			}
+		}
+		setAttr("saved", 1); 
+		setAttr("pwd", pwd);
+		renderJson();
+	}
+
+	public void audio(String url,String random) throws Exception {
+		java.util.Date date = new java.util.Date();
+		ConfessionService confessionService=(ConfessionService)SpringUtils.getBean("confessionService");
+		Confession confession = new Confession();
+		confession.setContent(url);
+		confession.setType(false);
+		confession.setReturnuid(0);
+		confession.setCtime(date); 
+		//随机码（后面接的数字是随机几位）
+		confession.setPwd(random);
+		confession.setReturnflag(false);
+		try {
+			confessionService.addConfession(confession);
+		} catch (Exception e) {
+			System.out.println("SQL执行错误");
+			e.printStackTrace();
+		}
+	}
+
+}
